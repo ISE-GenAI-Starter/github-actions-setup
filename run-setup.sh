@@ -20,14 +20,6 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com \
     --role=roles/cloudbuild.builds.builder
 
-# ----------- Manual Deployment ------------ #
-gcloud builds submit --tag gcr.io/${PROJECT_ID}/${SERVICE_NAME}
-
-gcloud run deploy ${SERVICE_NAME} \
-    --image gcr.io/${PROJECT_ID}/${SERVICE_NAME}:latest \
-    --region us-central1 \
-    --allow-unauthenticated
-
 # ---- Configure GCP for GitHub Actions ---- #
 OIDC_NAME=project-repo-test
 WORKLOAD_IDENTITY_POOL_NAME=github-test
